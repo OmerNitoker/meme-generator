@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body onload="onInit()">
+    <header class="main-header">
+        <div class="logo">MemeIt</div>
+        <nav class="header-nav">
+            <button class="gallery-btn" onclick="onGalleryClicked()">Gallery</button>
+            <button class="saved-btn">Saved</button>
+            <button class="randomize-btn">Random meme</button>
+        </nav>
+    </header>
+
+    <main class="gallery-container">
+        <nav class="gallery-nav">
+            <input type="text" placeholder="Search">
+            <div class="common">common searches</div>
+        </nav>
+        <div class="grid-container"></div>
+    </main>
+
+    <main class="editor-container">
+        <canvas class="meme-canvas hide" width="400" height="400"></canvas>
+        <div class="editor hide">
+            <input class="add-txt" type="text" placeholder="Add text" oninput="onChangeTxt(this.value)">
+            <div class="btn-container">
+                <button class="add-line" onclick="onAddLine()">Add line</button>
+                <button class="switch-lines">switch</button>
+                <button class="del-line">Delete line</button>
+            </div>
+            <div class="txt-editor">
+                <button class="txt-larger">A+</button>
+                <button class="txt-smaller">A-</button>
+                <button class="txt-left">Left</button>
+                <button class="txt-middle">Middle</button>
+                <button class="txt-right">Right</button>
+                <select name="font" id="select-font">
+                    <option value="">font1</option>
+                    <option value="">font2</option>
+                    <option value="">font3</option>
+                </select>
+                <button class="font-color">Font color</button>
+                <button class="fill-color">Fill color</button>
+            </div>
+            <div class="btns">
+                <a href="#" class="download-meme" download="file-name" onclick="onDownloadCanvas(this)">Download</a>
+                <button class="save-meme">Save</button>
+                <button class="share-meme">Share</button>
+            </div>
+        </div>
+    </main>
+    
+    <script src="js/meme.service.js"></script>
+    <script src="js/meme.controller.js"></script>
+</body>
+</html>
