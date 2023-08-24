@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Generator</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body onload="onInit()">
     <header class="main-header">
         <div class="logo">MemeIt</div>
@@ -34,8 +36,8 @@
                 <button class="del-line">Delete line</button>
             </div>
             <div class="txt-editor">
-                <button class="txt-larger">A+</button>
-                <button class="txt-smaller">A-</button>
+                <button class="txt-larger" onclick="onChangeFontSize(1)">A+</button>
+                <button class="txt-smaller" onclick="onChangeFontSize(-1)">A-</button>
                 <button class="txt-left">Left</button>
                 <button class="txt-middle">Middle</button>
                 <button class="txt-right">Right</button>
@@ -44,8 +46,12 @@
                     <option value="">font2</option>
                     <option value="">font3</option>
                 </select>
-                <button class="font-color">Font color</button>
-                <button class="fill-color">Fill color</button>
+                <!-- <button class="font-color">Font color</button> -->
+                <label for="font-color">Font color:</label>
+                <input type="color" id="font-color" name="font-color" value="#ff0000" oninput="onSetFontColor(this.value)">
+                <label for="fill-color">fill color:</label>
+                <input type="color" id="fill-color" name="fill-color" value="#ff0000" oninput="onSetFillColor(this.value)">
+                <!-- <button class="fill-color">Fill color</button> -->
             </div>
             <div class="btns">
                 <a href="#" class="download-meme" download="file-name" onclick="onDownloadCanvas(this)">Download</a>
@@ -54,8 +60,9 @@
             </div>
         </div>
     </main>
-    
+
     <script src="js/meme.service.js"></script>
     <script src="js/meme.controller.js"></script>
 </body>
+
 </html>

@@ -25,9 +25,15 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            text: 'Add text',
+            text: '',
+            textWidth: 0,
+            textHeight: 0,
             size: 20,
-            color: 'black'
+            fontColor: 'red',
+            fillColor: 'blue',
+            fontFamily: 'Arial',
+            pos: {x: 0 , y: 0},
+            isDrag: false
         }
     ]
 }
@@ -46,8 +52,6 @@ function updateCurrMeme(img) {
 }
 
 function getImgById(imgId) {
-    console.log('typeof(imgId):',typeof(imgId))
-    console.log('typeof(gImgs[0].id):',typeof(gImgs[0].id))
     return gImgs.find(image => image.id === imgId)
 }
 
@@ -66,10 +70,61 @@ function addLine() {
 }
 
 function getCoordinates() {
-    const x = 200
-    const y = 70 + 50*gMeme.selectedLineIdx
-    return {x, y}
+    const currIdx = gMeme.selectedLineIdx
+    if (gMeme.lines[currIdx].pos.x === 0 && gMeme.lines[currIdx].pos.y === 0) {   
+        gMeme.lines[currIdx].pos.x = 200
+        gMeme.lines[currIdx].pos.y = 70
+    }
+    return gMeme.lines[currIdx].pos
 }
+
+function changeFontSize(num) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].size += num
+}
+
+function changeFontColor(color) {
+    const currIdx = gMeme.selectedLineIdx
+    gMeme.lines[currIdx].fontColor = color
+}
+
+function changeFillColor(color) {
+    const currIdx = gMeme.selectedLineIdx
+    gMeme.lines[currIdx].fillColor = color
+}
+
+function updateTxtLength(txtWidth, txtHeight) {
+    const currIdx = gMeme.selectedLineIdx
+    gMeme.lines[currIdx].textWidth = txtWidth
+    gMeme.lines[currIdx].textHeight = txtHeight
+}
+
+function isTextClicked(position) {
+    const currIdx = gMeme.selectedLineIdx
+    const posX = gMeme.lines[currIdx].pos.x
+    const posY = gMeme.lines[currIdx].pos.y
+    const txtWidth = gMeme.lines[currIdx].textWidth
+    const txtHeight = gMeme.lines[currIdx].textHeight
+    const leftBound = posX - (txtWidth/2) - 2
+    const rightBound = posX + (txtWidth/2) + 2
+    const upperBound = posY - (txtHeight/2) -2
+    const lowerBound = posY + (txtHeight/2) +2
+   
+    if(position.x>leftBound && position.x < rightBound && position.y < lowerBound && position.y > upperBound) 
+        return true
+    return false
+    
+}
+
+function setTextDrag(isDrag) {
+    const currIdx = gMeme.selectedLineIdx
+    gMeme.lines[currIdx].isDrag = isDrag
+  }
+
+  function moveText(dx, dy) {
+    gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
+    gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
+  }
 
 
 
