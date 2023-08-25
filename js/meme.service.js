@@ -16,7 +16,7 @@ var gImgs = [{ id: 1, url: 'img/1.jpg', keywords: ['Donald', 'Trump', 'man'] },
 { id: 14, url: 'img/14.jpg', keywords: ['morpheus', 'glasses', 'bold', 'man'] },
 { id: 15, url: 'img/15.jpg', keywords: ['stark', 'zero', 'man', 'hair'] },
 { id: 16, url: 'img/16.jpg', keywords: ['laugh', 'hand', 'man'] },
-{ id: 17, url: 'img/17.jpg', keywords: ['putin', 'fingers','two', 'suit', 'man'] },
+{ id: 17, url: 'img/17.jpg', keywords: ['putin', 'fingers', 'two', 'suit', 'man'] },
 { id: 18, url: 'img/18.jpg', keywords: ['toy', 'story', 'buzz', 'woody'] },
 ]
 
@@ -25,14 +25,14 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            text: '',
+            text: 'Add text',
             textWidth: 0,
             textHeight: 0,
             size: 20,
-            fontColor: 'red',
+            fontColor: 'black',
             fillColor: 'blue',
             fontFamily: 'Arial',
-            pos: {x: 0 , y: 0},
+            pos: { x: 0, y: 0 },
             isDrag: false
         }
     ]
@@ -62,20 +62,38 @@ function updateTxt(txt) {
 
 function addLine() {
     gMeme.lines.push({
-        text: 'Add text',
+        text: 'Add text2',
+        textWidth: 0,
+        textHeight: 0,
         size: 20,
-        color: 'black'
+        fontColor: 'black',
+        fillColor: 'blue',
+        fontFamily: 'Arial',
+        pos: { x: 0, y: 0 },
+        isDrag: false
     })
-    gMeme.selectedLineIdx++
+    gMeme.selectedLineIdx = gMeme.lines.length-1
 }
 
-function getCoordinates() {
-    const currIdx = gMeme.selectedLineIdx
-    if (gMeme.lines[currIdx].pos.x === 0 && gMeme.lines[currIdx].pos.y === 0) {   
-        gMeme.lines[currIdx].pos.x = 200
-        gMeme.lines[currIdx].pos.y = 70
+function getCoordinates(canvas, idx) {
+    // const idx = gMeme.selectedLineIdx
+    if (gMeme.lines[idx].pos.x === 0 && gMeme.lines[idx].pos.y === 0) {
+        gMeme.lines[idx].pos.x = canvas.width / 2
+        if (idx === 0) gMeme.lines[idx].pos.y = 20
+        else if (idx === 1) gMeme.lines[idx].pos.y = canvas.height - 20
+        else gMeme.lines[idx].pos.y = canvas.height / 2
     }
-    return gMeme.lines[currIdx].pos
+    // console.log('gMeme.lines[currIdx].pos:',gMeme.lines[idx].pos)
+
+    return gMeme.lines[idx].pos
+}
+
+function locateText(canvas) {
+    const currIdx = gMeme.selectedLineIdx
+    if (gMeme.lines[currIdx].pos.x === 0 && gMeme.lines[currIdx].pos.y === 0) {
+        canvas.textAlign = "center"
+        if (currIdx === 0) canvas.textAlign = "start"
+    }
 }
 
 function changeFontSize(num) {
@@ -95,36 +113,52 @@ function changeFillColor(color) {
 
 function updateTxtLength(txtWidth, txtHeight) {
     const currIdx = gMeme.selectedLineIdx
+    if (currIdx === -1) return
     gMeme.lines[currIdx].textWidth = txtWidth
     gMeme.lines[currIdx].textHeight = txtHeight
 }
 
 function isTextClicked(position) {
-    const currIdx = gMeme.selectedLineIdx
-    const posX = gMeme.lines[currIdx].pos.x
-    const posY = gMeme.lines[currIdx].pos.y
-    const txtWidth = gMeme.lines[currIdx].textWidth
-    const txtHeight = gMeme.lines[currIdx].textHeight
-    const leftBound = posX - (txtWidth/2) - 2
-    const rightBound = posX + (txtWidth/2) + 2
-    const upperBound = posY - (txtHeight/2) -2
-    const lowerBound = posY + (txtHeight/2) +2
-   
-    if(position.x>leftBound && position.x < rightBound && position.y < lowerBound && position.y > upperBound) 
-        return true
-    return false
-    
+    for (let i =0 ; i<gMeme.lines.length ; i++) {
+        const currLine = gMeme.lines[i]
+        const posX = currLine.pos.x
+        const posY = currLine.pos.y
+        const txtWidth = currLine.textWidth
+        const txtHeight = currLine.textHeight
+        const leftBound = posX - (txtWidth / 2) - 2
+        const rightBound = posX + (txtWidth / 2) + 2
+        const upperBound = posY - (txtHeight / 2) - 2
+        const lowerBound = posY + (txtHeight / 2) + 2
+        
+        if (position.x > leftBound && position.x < rightBound && position.y < lowerBound && position.y > upperBound) {
+            gMeme.selectedLineIdx = i
+            return true
+        }
+}
+return false
+
 }
 
 function setTextDrag(isDrag) {
     const currIdx = gMeme.selectedLineIdx
+    if (currIdx === -1) return
     gMeme.lines[currIdx].isDrag = isDrag
-  }
+}
 
-  function moveText(dx, dy) {
+function moveText(dx, dy) {
     gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
     gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
-  }
+}
+
+function selectNone() {
+    gMeme.selectedLineIdx = -1
+}
+
+function deleteLine() {
+    if (gMeme.selectedLineIdx === -1) return
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    gMeme.selectedLineIdx = -1
+}
 
 
 

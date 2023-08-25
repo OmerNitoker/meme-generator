@@ -27,13 +27,15 @@ function onImageClicked(elImg) {
 }
 
 function renderMeme() {
-    console.log('rendered!')
-    
     const currMeme = getMeme()
+    const currIdx = currMeme.selectedLineIdx
     const elImage = document.getElementById(currMeme.selectedImg.id)
     gElCanvas.height = (elImage.naturalHeight / elImage.naturalWidth) * gElCanvas.width
     gCtx.drawImage(elImage, 0, 0, gElCanvas.width, gElCanvas.height)
-    drawText(currMeme)
+    for (let i = 0; i < currMeme.lines.length; i++) {
+        drawText(currMeme.lines[i], i)
+    }
+    drawRect()
 }
 
 function addListeners() {
@@ -41,20 +43,18 @@ function addListeners() {
     addTouchListeners()
 }
 
-function drawText(meme) {
-    console.log('meme:',meme)
-    
-    const currIdx = meme.selectedLineIdx
-    const fontStr = `${meme.lines[currIdx].size}px ${meme.lines[currIdx].fontFamily}`
-    const text = meme.lines[currIdx].text
+function drawText(line, idx) {
+    // const currIdx = meme.selectedLineIdx
+    const fontStr = `${line.size}px ${line.fontFamily}`
+    const text = line.text
     gCtx.lineWidth = 2
-    gCtx.strokeStyle = meme.lines[currIdx].fontColor
-    gCtx.fillStyle = meme.lines[currIdx].fillColor
+    gCtx.strokeStyle = line.fontColor
+    gCtx.fillStyle = line.fillColor
     gCtx.font = fontStr
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
-    const { x, y } = getCoordinates()
+    const { x, y } = getCoordinates(gElCanvas, idx)
 
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
@@ -65,11 +65,14 @@ function drawText(meme) {
 
 function onChangeTxt(txt) {
     updateTxt(txt)
+    drawRect()
     renderMeme()
 }
 
 function onAddLine() {
     addLine()
+    renderMeme()
+
 }
 
 function onDownloadCanvas(elBtn) {
@@ -123,8 +126,16 @@ function addTouchListeners() {
 
 function onDown(ev) {
     const pos = getEvPos(ev)
+    console.log('pos.x:', pos.x)
+    console.log('pos.y:', pos.y)
 
-    if (!isTextClicked(pos)) return
+
+    selectNone()
+    renderMeme()
+    if (!isTextClicked(pos)) {
+        return
+    }
+    drawRect()
     setTextDrag(true)
     //Save the pos we start from
     gStartPos = pos
@@ -132,7 +143,9 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-    const isDrag = getMeme().lines[gMeme.selectedLineIdx].isDrag
+    const currMeme = getMeme()
+    if (currMeme.selectedLineIdx === -1) return
+    const isDrag = currMeme.lines[gMeme.selectedLineIdx].isDrag
     if (!isDrag) return
     const pos = getEvPos(ev)
     const dx = pos.x - gStartPos.x
@@ -169,3 +182,22 @@ function getEvPos(ev) {
     }
     return pos
 }
+
+function drawRect() {
+    const currMeme = getMeme()
+    if (gMeme.selectedLineIdx === -1) return
+    const currLine = currMeme.lines[gMeme.selectedLineIdx]
+    const len = currLine.textWidth
+    const hgt = currLine.textHeight
+    const startX = currLine.pos.x - len/2 - 5 
+    const startY = currLine.pos.y - hgt/2 - 5
+   
+    gCtx.strokeStyle = 'black'
+    gCtx.strokeRect(startX, startY, len + 10, hgt + 10)
+}
+
+function onDeleteLine() {
+    deleteLine()
+    renderMeme()
+}
+
