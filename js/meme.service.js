@@ -67,8 +67,8 @@ function addLine() {
         textHeight: 0,
         size: 20,
         fontColor: 'black',
-        fillColor: 'blue',
-        fontFamily: 'Arial',
+        fillColor: 'white',
+        fontFamily: 'Impact',
         pos: { x: 0, y: 0 },
         isDrag: false
     })

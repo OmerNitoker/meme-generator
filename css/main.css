@@ -18,11 +18,11 @@ body {
 }
 
 .editor-container {
+    position: relative;
     display: flex;
-    justify-content: center;
-    width: 80vw;
-    gap: 60px;
+    width: 90vw;
     padding: 30px;
+    gap: 10px;
     /* justify-content: space-between; */
     margin: auto;
     border: solid 1px black;
@@ -31,9 +31,13 @@ body {
 }
 
 .editor {
+    /* position: absolute;
+    right: 10%; */
     display: flex;
     flex-direction: column;
+    /* flex-wrap: wrap; */
     gap: 15px;
+    width: 35vw;
     /* display: grid;
     grid-template-rows: repeat(8,20px);
     grid-template-columns: repeat(5,32px) ;
@@ -50,6 +54,11 @@ body {
         /* height: 100%;
         width: max-content; */
 }
+
+.canvas-container {
+    width: 45vw;
+}
+
 
 img {
     display: block;
@@ -97,6 +106,7 @@ img {
 
 .btn-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
 }
@@ -152,6 +162,14 @@ a {
     gap: 10px
 
   }
+
+  @media screen and (max-width: 768px) {
+    .editor-container {
+        flex-direction: column;
+        align-items: center;
+        transition: 1s;
+    }
+}
 
 /* .add-txt {
     grid-area: addTxt;

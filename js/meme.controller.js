@@ -10,6 +10,8 @@ function onInit() {
     gCtx = gElCanvas.getContext('2d')
     addListeners()
     rendergallery()
+
+    window.addEventListener('resize', resizeCanvas)
 }
 
 function rendergallery() {
@@ -203,6 +205,13 @@ function onDeleteLine() {
 
 function onSwitchLines() {
     switchLine()
+    renderMeme()
+}
+
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.clientWidth - 2
+    if (gElCanvas.width > 400) gElCanvas.width = 400
     renderMeme()
 }
 
