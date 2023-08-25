@@ -3,8 +3,8 @@
 }
 
 body {
-    align-items: center;
     margin: 0;
+    background-color: black;
 }
 
 .grid-container {
@@ -15,6 +15,40 @@ body {
 
     padding: 60px;
     margin: 0 auto;
+}
+
+.editor-container {
+    display: flex;
+    justify-content: center;
+    width: 80vw;
+    gap: 60px;
+    padding: 30px;
+    /* justify-content: space-between; */
+    margin: auto;
+    border: solid 1px black;
+    border-radius: 20px;
+    background-color: lightgray;
+}
+
+.editor {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* display: grid;
+    grid-template-rows: repeat(8,20px);
+    grid-template-columns: repeat(5,32px) ;
+    gap: 10px; */
+    /* grid-template-areas: 
+        "empty addTxt addTxt addTxt empty"
+        "empty plus switch del empty"
+        "empty empty empty empty empty"
+        "incFont decFont lef mid righ"
+        "family family family fontColor fillColor"
+        "icons icons icons icons icons"
+        "empty empty empty empty empty"
+        "download empty save empty share"; */
+        /* height: 100%;
+        width: max-content; */
 }
 
 img {
@@ -52,8 +86,149 @@ img {
     border: solid 2px black;
 }
 
-.editor-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 50px;
+.btn {
+    width: max-content;
+    padding: 1em;
+    border-radius: 5px;
+    background-color: rgb(153, 137, 204);
+    cursor: pointer;
+    font-weight: bold;
 }
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.add-txt {
+    padding: 5px;
+    border-radius: 10px;
+    border: solid 2px gray;
+}
+
+.switch-lines {
+    padding-inline: 0.6em;
+}
+
+.size-align {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.font-family-color {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block-start: 15px;
+}
+
+.font-family {
+    flex-grow: 1;
+    height: max-content;
+    padding: 10px;
+    border: solid 2px gray;
+    border-radius: 10px;
+}
+
+.icons {
+    background-color: rgb(147, 217, 147);
+    padding: 10px;
+    border: solid 2px gray;
+    border-radius: 10px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    border: solid 2px rgb(68, 68, 68);
+  }
+
+  .btns {
+    display: flex;
+    justify-content: center;
+    gap: 10px
+
+  }
+
+/* .add-txt {
+    grid-area: addTxt;
+}
+
+.add-line {
+    grid-area: plus;
+}
+
+.switch-lines {
+    grid-area: switch;
+}
+
+.del-line {
+    grid-area: del;
+}
+
+.txt-larger {
+    grid-area: incFont;
+}
+
+.txt-smaller {
+    grid-area: decFont;
+}
+
+.txt-left {
+    grid-area: lef;
+}
+
+.txt-middle {
+    grid-area: mid;
+}
+
+.txt-right {
+    grid-area: righ;
+}
+
+.font-family {
+    grid-area: family;
+}
+
+.font-color {
+    grid-area: fontColor;
+}
+
+.fill-color {
+    grid-area: fillColor;
+}
+
+.icons {
+    grid-area: icons;
+}
+
+.download-meme {
+    grid-area: download;
+}
+
+.save-meme {
+    grid-area: save;
+}
+
+.share-meme {
+    grid-area: share;
+}
+
+.empty-div {
+    grid-area: empty;
+}
+ */
+
+
+
+
+
+
+
+
+
+
+

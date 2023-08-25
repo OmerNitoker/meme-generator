@@ -201,3 +201,8 @@ function onDeleteLine() {
     renderMeme()
 }
 
+function onSwitchLines() {
+    switchLine()
+    renderMeme()
+}
+

@@ -28,10 +28,10 @@ var gMeme = {
             text: 'Add text',
             textWidth: 0,
             textHeight: 0,
-            size: 20,
+            size: 25,
             fontColor: 'black',
-            fillColor: 'blue',
-            fontFamily: 'Arial',
+            fillColor: 'white',
+            fontFamily: 'Impact',
             pos: { x: 0, y: 0 },
             isDrag: false
         }
@@ -62,7 +62,7 @@ function updateTxt(txt) {
 
 function addLine() {
     gMeme.lines.push({
-        text: 'Add text2',
+        text: 'Add text',
         textWidth: 0,
         textHeight: 0,
         size: 20,
@@ -158,6 +158,11 @@ function deleteLine() {
     if (gMeme.selectedLineIdx === -1) return
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
     gMeme.selectedLineIdx = -1
+}
+
+function switchLine() {
+    gMeme.selectedLineIdx++
+    if (gMeme.selectedLineIdx === gMeme.lines.length) gMeme.selectedLineIdx = 0
 }
 
 

@@ -31,36 +31,64 @@
         <div class="editor hide">
             <input class="add-txt" type="text" placeholder="Add text" oninput="onChangeTxt(this.value)">
             <div class="btn-container">
-                <button class="add-line" onclick="onAddLine()">Add line</button>
-                <button class="switch-lines">switch</button>
-                <button class="del-line" onclick="onDeleteLine()">Delete line</button>
+                <div class="btn add-line" onclick="onAddLine()">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="btn switch-lines" onclick="onSwitchLines()">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </div>
+                <div class="btn del-line" onclick="onDeleteLine()">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
             </div>
             <div class="txt-editor">
-                <button class="txt-larger" onclick="onChangeFontSize(1)">A+</button>
-                <button class="txt-smaller" onclick="onChangeFontSize(-1)">A-</button>
-                <button class="txt-left">Left</button>
-                <button class="txt-middle">Middle</button>
-                <button class="txt-right">Right</button>
-                <select name="font" id="select-font">
-                    <option value="">font1</option>
-                    <option value="">font2</option>
-                    <option value="">font3</option>
-                </select>
-                <!-- <button class="font-color">Font color</button> -->
-                <label for="font-color">Font color:</label>
-                <input type="color" id="font-color" name="font-color" value="#ff0000" oninput="onSetFontColor(this.value)">
-                <label for="fill-color">fill color:</label>
-                <input type="color" id="fill-color" name="fill-color" value="#ff0000" oninput="onSetFillColor(this.value)">
-                <!-- <button class="fill-color">Fill color</button> -->
+                <div class="size-align">
+                    <div class="btn txt-larger" onclick="onChangeFontSize(1)">A+</div>
+                    <div class="btn txt-smaller" onclick="onChangeFontSize(-1)">A-</div>
+                    <div class="btn txt-left">
+                        <i class="fa-solid fa-align-left"></i>
+                    </div>
+                    <div class="btn txt-middle">
+                        <i class="fa-solid fa-align-center"></i>
+                    </div>
+                    <div class="btn txt-right">
+                        <i class="fa-solid fa-align-right"></i>
+                    </div>
+                </div>
+                <div class="font-family-color">
+                    <select name="font" id="select-font" class="font-family">
+                        <option value="">Impact</option>
+                        <option value="">font2</option>
+                        <option value="">font3</option>
+                    </select>
+                    <div class="btn font-color">
+                        <label for="font-color">
+                            <i class="fa-solid fa-palette" style="color: #000000;"></i>
+                        </label>
+                        <input type="color" class="hide" id="font-color" name="font-color" value="#000000"
+                            oninput="onSetFontColor(this.value)">
+                    </div>
+                    <div class="btn fill-color">
+                        <label for="fill-color">
+                            <i class="fa-solid fa-fill-drip" style="color: #000000;"></i>
+                        </label>
+                        <input type="color" class="fill-color hide" id="fill-color" name="fill-color" value="#ffffff"
+                            oninput="onSetFillColor(this.value)">
+                    </div>
+                </div>
             </div>
+            <div class="icons">Stickers - soon!</div>
             <div class="btns">
-                <a href="#" class="download-meme" download="file-name" onclick="onDownloadCanvas(this)">Download</a>
-                <button class="save-meme">Save</button>
-                <button class="share-meme">Share</button>
+                <a href="#" class="btn download-meme" download="file-name" onclick="onDownloadCanvas(this)">Download</a>
+                <button class="btn save-meme">Save - soon</button>
+                <button class="btn share-meme">Share - soon</button>
+                <div class="empty-div"></div>
             </div>
         </div>
     </main>
 
+    <script src="https://kit.fontawesome.com/82d3e6e292.js" crossorigin="anonymous"></script>
     <script src="js/meme.service.js"></script>
     <script src="js/meme.controller.js"></script>
 </body>
