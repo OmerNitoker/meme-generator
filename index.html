@@ -12,17 +12,16 @@
     <header class="main-header">
         <div class="logo">MemeIt</div>
         <nav class="header-nav">
-            <button class="gallery-btn" onclick="onGalleryClicked()">Gallery</button>
-            <button class="saved-btn">Saved</button>
-            <button class="randomize-btn">Random meme</button>
+            <button class="header-btn" onclick="onGalleryClicked()">Gallery</button>
+            <button class="header-btn" onclick="onSetSaved()">Saved</button>
+            <button class="header-btn">I'm flexible - soon!</button>
         </nav>
     </header>
 
     <main class="gallery-container">
-        <nav class="gallery-nav">
+        <!-- <nav class="gallery-nav">
             <input type="text" placeholder="Search">
-            <!-- <div class="common">common searches</div> -->
-        </nav>
+        </nav> -->
         <div class="grid-container"></div>
     </main>
 
@@ -86,14 +85,20 @@
             <div class="icons">Stickers - soon!</div>
             <div class="btns">
                 <a href="#" class="btn download-meme" download="file-name" onclick="onDownloadCanvas(this)">Download</a>
-                <button class="btn save-meme">Save - soon</button>
-                <button class="btn share-meme">Share - soon</button>
+                <button class="btn save-meme" onclick="onSaveMeme()">Save</button>
+                <button class="btn share-meme" onclick="onUploadImg()">Share <i class="fab fa-facebook-f"></i></button>
                 <div class="empty-div"></div>
             </div>
         </div>
     </main>
 
+    <main class="saved-container hide">
+        <h2>Saved memes:</h2>
+        <div class="grid-container"></div>
+    </main>
+
     <script src="https://kit.fontawesome.com/82d3e6e292.js" crossorigin="anonymous"></script>
+    <script src="js/utils.service.js"></script>
     <script src="js/meme.service.js"></script>
     <script src="js/meme.controller.js"></script>
 </body>

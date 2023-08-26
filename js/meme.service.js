@@ -38,6 +38,7 @@ var gMeme = {
     ]
 }
 
+
 function getImages() {
     return gImgs
 }
@@ -72,7 +73,7 @@ function addLine() {
         pos: { x: 0, y: 0 },
         isDrag: false
     })
-    gMeme.selectedLineIdx = gMeme.lines.length-1
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 
 function getCoordinates(canvas, idx, align) {
@@ -127,7 +128,7 @@ function updateTxtLength(txtWidth, txtHeight) {
 }
 
 function isTextClicked(position) {
-    for (let i =0 ; i<gMeme.lines.length ; i++) {
+    for (let i = 0; i < gMeme.lines.length; i++) {
         const currLine = gMeme.lines[i]
         const posX = currLine.pos.x
         const posY = currLine.pos.y
@@ -137,14 +138,13 @@ function isTextClicked(position) {
         const rightBound = posX + (txtWidth / 2) + 2
         const upperBound = posY - (txtHeight / 2) - 2
         const lowerBound = posY + (txtHeight / 2) + 2
-        
+
         if (position.x > leftBound && position.x < rightBound && position.y < lowerBound && position.y > upperBound) {
             gMeme.selectedLineIdx = i
             return true
         }
-}
-return false
-
+    }
+    return false
 }
 
 function setTextDrag(isDrag) {
@@ -175,10 +175,42 @@ function switchLine() {
 
 function changeFont(fontName) {
     gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontName
-    console.log('gMeme.lines[gMeme.selectedLineIdx]:',gMeme.lines[gMeme.selectedLineIdx])
-    
-    
 }
 
+function saveMeme(canvas) {
+    if (!localStorage.getItem('storageIdx')) localStorage.setItem('storageIdx', 0)
+    let idx = localStorage.getItem('storageIdx')
+    localStorage.setItem(`memeDB${idx}`, canvas.toDataURL())
+    idx++
+    localStorage.setItem('storageIdx', idx)
+}
+
+function initMeme() {
+    gMeme.lines = [
+        {
+            text: 'Add text',
+            textWidth: 0,
+            textHeight: 0,
+            size: 25,
+            fontColor: 'black',
+            fillColor: 'white',
+            fontFamily: 'Impact',
+            pos: { x: 0, y: 0 },
+            isDrag: false
+        }
+    ]
+    gMeme.selectedLineIdx = 0
+}
+
+function getSavedImgs() {
+    let savedImgs = []
+    let savedNum = localStorage.getItem('storageIdx')
+    if (!savedNum) return []
+   while (savedNum > 0) {
+    savedImgs.push(localStorage.getItem(`memeDB${savedNum-1}`))
+    savedNum--
+   }
+   return savedImgs
+}
 
 
