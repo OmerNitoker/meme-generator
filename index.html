@@ -59,25 +59,25 @@
                     </div>
                 </div>
                 <div class="font-family-color">
-                    <select name="font" id="select-font" class="font-family">
-                        <option value="">Impact</option>
-                        <option value="">font2</option>
-                        <option value="">font3</option>
+                    <select name="font" id="select-font" class="font-family" onchange="onSetFont(this.value)">
+                        <option value="Impact">Impact</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Times new roman">Times new roman</option>
+                        <option value="Georgia">Georgia</option>
                     </select>
-                    <div class="btn font-color">
-                        <label for="font-color">
+                    
+                        <label for="font-color" class="btn">
                             <i class="fa-solid fa-palette" style="color: #000000;"></i>
                         </label>
-                        <input type="color" class="hide" id="font-color" name="font-color" value="#000000"
+                        <input type="color" class="clr-plate hide" id="font-color" name="font-color" value="#000000"
                             oninput="onSetFontColor(this.value)">
-                    </div>
-                    <div class="btn fill-color">
-                        <label for="fill-color">
+                        <label for="fill-color" class="btn">
                             <i class="fa-solid fa-fill-drip" style="color: #000000;"></i>
                         </label>
-                        <input type="color" class="fill-color hide" id="fill-color" name="fill-color" value="#ffffff"
+                        <input type="color" class="clr-plate hide" id="fill-color" name="fill-color" value="#ffffff"
                             oninput="onSetFillColor(this.value)">
-                    </div>
                 </div>
             </div>
             <div class="icons">Stickers - soon!</div>

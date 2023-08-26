@@ -165,5 +165,12 @@ function switchLine() {
     if (gMeme.selectedLineIdx === gMeme.lines.length) gMeme.selectedLineIdx = 0
 }
 
+function changeFont(fontName) {
+    gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontName
+    console.log('gMeme.lines[gMeme.selectedLineIdx]:',gMeme.lines[gMeme.selectedLineIdx])
+    
+    
+}
+
 
 

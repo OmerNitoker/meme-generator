@@ -27,7 +27,7 @@ body {
     margin: auto;
     border: solid 1px black;
     border-radius: 20px;
-    background-color: lightgray;
+    background-color: rgb(84, 87, 110);
 }
 
 .editor {
@@ -98,10 +98,16 @@ img {
 .btn {
     width: max-content;
     padding: 1em;
+    border: solid 2px black;
     border-radius: 5px;
     background-color: rgb(153, 137, 204);
     cursor: pointer;
     font-weight: bold;
+}
+
+.btn:hover {
+    background-color: white;
+   
 }
 
 .btn-container {
@@ -169,6 +175,11 @@ a {
         align-items: center;
         transition: 1s;
     }
+}
+
+.clr-plate {
+    position: relative;
+    left: 200px;
 }
 
 /* .add-txt {

@@ -215,3 +215,9 @@ function resizeCanvas() {
     renderMeme()
 }
 
+function onSetFont(fontName) {
+    console.log('fontName:',fontName)
+    changeFont(fontName)
+    renderMeme()
+}
+
