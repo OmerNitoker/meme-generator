@@ -221,3 +221,10 @@ function onSetFont(fontName) {
     renderMeme()
 }
 
+function onAlignLine(position) {
+    const currMeme = getMeme()
+    if (currMeme.selectedLineIdx === -1) return
+    getCoordinates(gElCanvas, currMeme.selectedLineIdx, position)
+    renderMeme()
+}
+

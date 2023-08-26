@@ -65,7 +65,7 @@ function addLine() {
         text: 'Add text',
         textWidth: 0,
         textHeight: 0,
-        size: 20,
+        size: 25,
         fontColor: 'black',
         fillColor: 'white',
         fontFamily: 'Impact',
@@ -75,17 +75,25 @@ function addLine() {
     gMeme.selectedLineIdx = gMeme.lines.length-1
 }
 
-function getCoordinates(canvas, idx) {
-    // const idx = gMeme.selectedLineIdx
-    if (gMeme.lines[idx].pos.x === 0 && gMeme.lines[idx].pos.y === 0) {
-        gMeme.lines[idx].pos.x = canvas.width / 2
-        if (idx === 0) gMeme.lines[idx].pos.y = 20
-        else if (idx === 1) gMeme.lines[idx].pos.y = canvas.height - 20
-        else gMeme.lines[idx].pos.y = canvas.height / 2
+function getCoordinates(canvas, idx, align) {
+    const currPos = gMeme.lines[idx].pos
+    if (currPos.x === 0 && currPos.y === 0) {
+        currPos.x = canvas.width / 2
+        if (idx === 0) currPos.y = 20
+        else if (idx === 1) currPos.y = canvas.height - 20
+        else currPos.y = canvas.height / 2
     }
-    // console.log('gMeme.lines[currIdx].pos:',gMeme.lines[idx].pos)
+    if (align === 'left') {
+        currPos.x = 5 + gMeme.lines[idx].textWidth / 2
+    }
+    else if (align === 'middle') {
+        currPos.x = canvas.width / 2
+    }
+    else if (align === 'right') {
+        currPos.x = canvas.width - 5 - gMeme.lines[idx].textWidth / 2
+    }
 
-    return gMeme.lines[idx].pos
+    return currPos
 }
 
 function locateText(canvas) {

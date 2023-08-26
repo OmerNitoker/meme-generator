@@ -48,13 +48,13 @@
                 <div class="size-align">
                     <div class="btn txt-larger" onclick="onChangeFontSize(1)">A+</div>
                     <div class="btn txt-smaller" onclick="onChangeFontSize(-1)">A-</div>
-                    <div class="btn txt-left">
+                    <div class="btn txt-left" onclick="onAlignLine('left')">
                         <i class="fa-solid fa-align-left"></i>
                     </div>
-                    <div class="btn txt-middle">
+                    <div class="btn txt-middle" onclick="onAlignLine('middle')">
                         <i class="fa-solid fa-align-center"></i>
                     </div>
-                    <div class="btn txt-right">
+                    <div class="btn txt-right" onclick="onAlignLine('right')">
                         <i class="fa-solid fa-align-right"></i>
                     </div>
                 </div>
@@ -67,17 +67,20 @@
                         <option value="Times new roman">Times new roman</option>
                         <option value="Georgia">Georgia</option>
                     </select>
-                    
+                    <div>
                         <label for="font-color" class="btn">
                             <i class="fa-solid fa-palette" style="color: #000000;"></i>
                         </label>
                         <input type="color" class="clr-plate hide" id="font-color" name="font-color" value="#000000"
                             oninput="onSetFontColor(this.value)">
+                    </div>
+                    <div>
                         <label for="fill-color" class="btn">
                             <i class="fa-solid fa-fill-drip" style="color: #000000;"></i>
                         </label>
                         <input type="color" class="clr-plate hide" id="fill-color" name="fill-color" value="#ffffff"
                             oninput="onSetFillColor(this.value)">
+                    </div>
                 </div>
             </div>
             <div class="icons">Stickers - soon!</div>
