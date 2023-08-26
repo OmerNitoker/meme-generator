@@ -172,14 +172,12 @@ function getEvPos(ev) {
     }
 
     if (TOUCH_EVS.includes(ev.type)) {
-        // Prevent triggering the mouse ev
         ev.preventDefault()
-        // Gets the first touch point
         ev = ev.changedTouches[0]
-        // Calc the right pos according to the touch screen
+        var rect = gElCanvas.getBoundingClientRect()
         pos = {
-            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+            x: ev.pageX - rect.left,
+            y: ev.pageY - rect.top
         }
     }
     return pos
@@ -191,9 +189,9 @@ function drawRect() {
     const currLine = currMeme.lines[gMeme.selectedLineIdx]
     const len = currLine.textWidth
     const hgt = currLine.textHeight
-    const startX = currLine.pos.x - len/2 - 5 
-    const startY = currLine.pos.y - hgt/2 - 5
-   
+    const startX = currLine.pos.x - len / 2 - 5
+    const startY = currLine.pos.y - hgt / 2 - 5
+
     gCtx.strokeStyle = 'black'
     gCtx.strokeRect(startX, startY, len + 10, hgt + 10)
 }
@@ -216,7 +214,7 @@ function resizeCanvas() {
 }
 
 function onSetFont(fontName) {
-    console.log('fontName:',fontName)
+    console.log('fontName:', fontName)
     changeFont(fontName)
     renderMeme()
 }
