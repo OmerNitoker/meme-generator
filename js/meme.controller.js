@@ -176,8 +176,8 @@ function getEvPos(ev) {
         ev = ev.changedTouches[0]
         var rect = gElCanvas.getBoundingClientRect()
         pos = {
-            x: ev.pageX - rect.left,
-            y: ev.pageY - rect.top
+            x: ev.pageX - rect.left - window.scrollX,
+            y: ev.pageY - rect.top - window.scrollY
         }
     }
     return pos
