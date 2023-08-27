@@ -58,6 +58,7 @@ function getImgById(imgId) {
 
 function updateTxt(txt) {
     const lineIdx = gMeme.selectedLineIdx
+    if (lineIdx === -1) return
     gMeme.lines[lineIdx].text = txt
 }
 
@@ -120,11 +121,9 @@ function changeFillColor(color) {
     gMeme.lines[currIdx].fillColor = color
 }
 
-function updateTxtLength(txtWidth, txtHeight) {
-    const currIdx = gMeme.selectedLineIdx
-    if (currIdx === -1) return
-    gMeme.lines[currIdx].textWidth = txtWidth
-    gMeme.lines[currIdx].textHeight = txtHeight
+function updateTxtLength(txtWidth, txtHeight, idx) {
+    gMeme.lines[idx].textWidth = txtWidth
+    gMeme.lines[idx].textHeight = txtHeight
 }
 
 function isTextClicked(position) {
@@ -141,9 +140,13 @@ function isTextClicked(position) {
 
         if (position.x > leftBound && position.x < rightBound && position.y < lowerBound && position.y > upperBound) {
             gMeme.selectedLineIdx = i
+            console.log('gMeme.selectedLineIdx:',gMeme.selectedLineIdx)
             return true
         }
     }
+    gMeme.selectedLineIdx = -1
+    console.log('gMeme.selectedLineIdx:',gMeme.selectedLineIdx)
+    
     return false
 }
 
@@ -171,6 +174,8 @@ function deleteLine() {
 function switchLine() {
     gMeme.selectedLineIdx++
     if (gMeme.selectedLineIdx === gMeme.lines.length) gMeme.selectedLineIdx = 0
+    console.log('gMeme:',gMeme)
+    
 }
 
 function changeFont(fontName) {
@@ -212,5 +217,11 @@ function getSavedImgs() {
    }
    return savedImgs
 }
+
+// function updateSelectedLine(position) {
+//     gMeme.lines.forEach(txt => (
+//         if(position.x < )
+//     ))
+// }
 
 

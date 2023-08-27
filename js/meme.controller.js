@@ -30,7 +30,6 @@ function onImageClicked(elImg) {
 
 function renderMeme() {
     const currMeme = getMeme()
-    const currIdx = currMeme.selectedLineIdx
     const elImage = document.getElementById(currMeme.selectedImg.id)
     gElCanvas.height = (elImage.naturalHeight / elImage.naturalWidth) * gElCanvas.width
     gCtx.drawImage(elImage, 0, 0, gElCanvas.width, gElCanvas.height)
@@ -61,17 +60,20 @@ function drawText(line, idx) {
     gCtx.strokeText(text, x, y)
     const txtWidth = gCtx.measureText(text).width
     const txtHeight = gCtx.measureText(text).actualBoundingBoxAscent + gCtx.measureText(text).actualBoundingBoxDescent
-    updateTxtLength(txtWidth, txtHeight)
+    console.log('txtWidth:',txtWidth)
+    console.log('txtHeight:',txtHeight)
+    
+    updateTxtLength(txtWidth, txtHeight, idx)
 }
 
 function onChangeTxt(txt) {
     updateTxt(txt)
-    drawRect()
     renderMeme()
 }
 
 function onAddLine() {
     addLine()
+    updateInputTxt()
     renderMeme()
 }
 
@@ -148,7 +150,8 @@ function onDown(ev) {
     selectNone()
     renderMeme()
     if (!isTextClicked(pos)) return
-    drawRect()
+    updateInputTxt()
+    renderMeme()
     setTextDrag(true)
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
@@ -209,13 +212,14 @@ function onDeleteLine() {
 
 function onSwitchLines() {
     switchLine()
+    updateInputTxt()
     renderMeme()
 }
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.clientWidth - 2
-    if (gElCanvas.width > 400) gElCanvas.width = 400
+    if (gElCanvas.width > 350) gElCanvas.width = 350
     renderMeme()
 }
 
@@ -282,6 +286,16 @@ function rendergallery() {
     const images = getImages()
     const strHtmls = images.map(image => `<img src="${image.url}" id="${image.id}" onclick="onImageClicked(this)">`)
     elGallery.innerHTML = strHtmls.join('')
+}
+
+function updateInputTxt() {
+    const currMeme = getMeme()
+    const currIdx = currMeme.selectedLineIdx
+    if (currIdx === -1) return
+    const currTxt = currMeme.lines[currIdx].text
+    const elInput = document.querySelector('.add-txt')
+    elInput.value = currTxt
+
 }
 
 

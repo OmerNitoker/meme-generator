@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-    background-color: black;
+    background: linear-gradient(#8863dd, #c6c8e4);
 }
 
 .grid-container {
@@ -19,7 +19,8 @@ body {
 .editor-container {
     position: relative;
     display: flex;
-    width: 90vw;
+    justify-content: space-evenly;
+    width: 75vw;
     padding: 30px;
     gap: 10px;
     margin: auto;
@@ -33,6 +34,7 @@ body {
     flex-direction: column;
     gap: 15px;
     width: 35vw;
+    margin-inline-end: 2em;
 }
 
 .canvas-container {
@@ -57,12 +59,12 @@ img {
     align-items: center;
     margin: 20px;
     padding: 10px;
-    background-color: rgb(237, 163, 163);
+    background-color: rgb(232, 211, 211);
     border-radius: 10px;
 }
 
 .logo {
-    margin-inline-start: 2em;
+    /* margin-inline-start: 1em; */
     font-size: 2rem;
     font-weight: bold;
 }
@@ -77,7 +79,7 @@ img {
 
 .btn {
     width: max-content;
-    padding: 1em;
+    padding: 0.5em;
     border: solid 2px black;
     border-radius: 5px;
     background-color: rgb(153, 137, 204);
@@ -181,7 +183,6 @@ a {
     .editor-container {
         flex-direction: column;
         align-items: center;
-        transition: 1s;
     }
 }
 
